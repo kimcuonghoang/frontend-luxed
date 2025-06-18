@@ -17,16 +17,16 @@ const router = createBrowserRouter([
     children: clientRoutes,
   },
   {
+    // path: "/admin",
+    // element: <ProtectedRoute />,
+    // children: [
+    //   {
     path: "/admin",
-    element: <ProtectedRoute />,
-    children: [
-      {
-        path: "",
-        element: <AdminLayout />,
-        children: adminRoutes,
-      },
-    ],
+    element: <AdminLayout />,
+    children: adminRoutes,
   },
+  // ],
+  // },
   { path: "*", element: <NotFound /> },
   { path: "/auth/register", element: <Register /> },
   { path: "/auth/login", element: <Login /> },

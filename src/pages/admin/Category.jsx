@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { Button, Modal } from "antd";
+import { Button, message, Modal } from "antd";
 import CategoryAdd from "./CategoryAdd";
 import CategoryEdit from "./CategoryEdit";
 import {
@@ -30,7 +30,7 @@ const Category = () => {
       const res = await getAllCategory();
       setProducts(res.data.data || []);
     } catch (err) {
-      toast.error("Không thể tải danh sách category.");
+      message.error("Không thể tải danh sách category.");
     } finally {
       setLoading(false);
     }
@@ -45,10 +45,10 @@ const Category = () => {
     if (confirm("Bạn có chắc muốn xoá category này?")) {
       try {
         await deleteCategory(id);
-        toast.success("Đã xoá category thành công");
+        message.success("Đã xoá category thành công");
         fetchProducts();
       } catch (err) {
-        toast.error("Không thể xoá category.");
+        message.error("Không thể xoá category.");
       }
     }
   };
@@ -59,10 +59,10 @@ const Category = () => {
         ...product,
         status: product.status === "available" ? "out_of_stock" : "available",
       });
-      toast.success("Cập nhật trạng thái thành công!");
+      message.success("Cập nhật trạng thái thành công!");
       fetchProducts();
     } catch (err) {
-      toast.error("Có lỗi xảy ra khi cập nhật trạng thái.");
+      message.error("Có lỗi xảy ra khi cập nhật trạng thái.");
     }
   };
 

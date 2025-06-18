@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { getCategoryDetail, updateCategory } from "../../api/categoryApi";
+import { message } from "antd";
 
 const CategoryEdit = ({ productId, onClose, onSuccess }) => {
   const {
@@ -19,7 +20,7 @@ const CategoryEdit = ({ productId, onClose, onSuccess }) => {
         reset(product);
         setLoading(false);
       } catch (error) {
-        toast.error("Lỗi khi tải dữ liệu danh mục!");
+        message.error("Lỗi khi tải dữ liệu danh mục!");
         console.error(error);
       }
     };
@@ -35,11 +36,11 @@ const CategoryEdit = ({ productId, onClose, onSuccess }) => {
         price: parseFloat(data.price),
         countInStock: parseInt(data.countInStock),
       });
-      toast.success("Cập nhật danh mục thành công!");
+      message.success("Cập nhật danh mục thành công!");
       onSuccess && onSuccess();
       onClose && onClose();
     } catch (error) {
-      toast.error("Cập nhật thất bại!");
+      message.error("Cập nhật thất bại!");
       console.error(error);
     }
   };

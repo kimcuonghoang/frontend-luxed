@@ -6,7 +6,7 @@ import {
   getAllProduct,
   updateProduct,
 } from "../../api/productApi";
-import { Button, Modal } from "antd";
+import { Button, message, Modal } from "antd";
 import ProductAdd from "./ProductAdd";
 import ProductEdit from "./ProductEdit";
 
@@ -39,7 +39,7 @@ const Product = () => {
       });
       setProducts(res.data.data || []);
     } catch (err) {
-      toast.error("Không thể tải danh sách sản phẩm.");
+      message.error("Không thể tải danh sách sản phẩm.");
     } finally {
       setLoading(false);
     }
@@ -54,10 +54,10 @@ const Product = () => {
     if (confirm("Bạn có chắc muốn xoá sản phẩm này?")) {
       try {
         await deleteProduct(id);
-        toast.success("Đã xoá sản phẩm thành công");
+        message.success("Đã xoá sản phẩm thành công");
         fetchProducts();
       } catch (err) {
-        toast.error("Không thể xoá sản phẩm.");
+        message.error("Không thể xoá sản phẩm.");
       }
     }
   };
@@ -68,16 +68,20 @@ const Product = () => {
         ...product,
         status: product.status === "available" ? "out_of_stock" : "available",
       });
-      toast.success("Cập nhật trạng thái thành công!");
+      message.success("Cập nhật trạng thái thành công!");
       fetchProducts();
     } catch (err) {
-      toast.error("Có lỗi xảy ra khi cập nhật trạng thái.");
+      message.error("Có lỗi xảy ra khi cập nhật trạng thái.");
     }
   };
 
   return (
     <div className="container mt-5">
-      <Button type="primary" onClick={() => setIsAddModalOpen(true)}>
+      <Button
+        className="bg-black mb-4 "
+        type="primary"
+        onClick={() => setIsAddModalOpen(true)}
+      >
         Thêm mới sản phẩm
       </Button>
       <Modal
@@ -91,8 +95,6 @@ const Product = () => {
           onSuccess={fetchProducts}
         />
       </Modal>
-
-      <h2 className="text-center mt-3">Danh sách sản phẩm</h2>
 
       <div className="row mb-3">
         <div className="col-md-4">

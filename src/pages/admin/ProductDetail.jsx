@@ -40,14 +40,19 @@ const ProductDetail = () => {
             <strong>Mô tả:</strong> {product.description}
           </p>
           <p>
-            <strong>Giá:</strong>{" "}
-            {product.price?.toLocaleString("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            })}
+            <strong>Giá:</strong> {product.price}
           </p>
           <p>
-            <strong>Danh mục:</strong> {product.category || "Chưa phân loại"}
+            <strong>Thương hiệu:</strong>{" "}
+            {product.brand.title || "Chưa phân loại"}
+          </p>
+          <p>
+            <strong>Danh mục:</strong>{" "}
+            {product.category.title || "Chưa phân loại"}
+          </p>
+          <p>
+            <strong>Danh mục con:</strong>{" "}
+            {product.subCategory.title || "Chưa phân loại"}
           </p>
           <p>
             <strong>Trạng thái:</strong>{" "}
@@ -61,7 +66,7 @@ const ProductDetail = () => {
       </div>
 
       <div className="mt-4 text-center">
-        <Link to="/admin/product" className="btn btn-secondary">
+        <Link to="/admin/products" className="btn btn-secondary">
           Quay lại danh sách
         </Link>
       </div>

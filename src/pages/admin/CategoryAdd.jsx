@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createCategory } from "../../api/categoryApi";
+import { message } from "antd";
 
 const CategoryAdd = () => {
   const {
@@ -20,11 +21,11 @@ const CategoryAdd = () => {
       };
 
       await createCategory(newCategory);
-      toast.success("Tạo danh mục thành công!");
+      message.success("Tạo danh mục thành công!");
       reset();
     } catch (err) {
       console.error(err);
-      toast.error("Có lỗi xảy ra khi tạo danh mục.");
+      message.error("Có lỗi xảy ra khi tạo danh mục.");
     }
   };
 

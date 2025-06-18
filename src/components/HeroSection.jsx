@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
-    <div className="flex  gap-10 mt-20 px-4 max-w-7xl mx-auto">
+    <div className="flex gap-10 mt-10 px-4 max-w-7xl mx-auto">
       <div className="flex-shrink-0">
         <img
           src={image}
