@@ -80,11 +80,11 @@ const Register = () => {
                     <input
                       type="text"
                       className=" w-full border-b-2 border-gray-400"
-                      {...register("username")}
+                      {...register("fullname")}
                     />
-                    {errors?.username && (
+                    {errors?.fullname && (
                       <span className="text-danger">
-                        {errors.username.message}
+                        {errors.fullname.message}
                       </span>
                     )}
                   </div>

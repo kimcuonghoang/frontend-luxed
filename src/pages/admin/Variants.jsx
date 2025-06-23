@@ -34,7 +34,7 @@ const Variants = () => {
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState(null);
- 
+
   const fetchAll = async () => {
     try {
       setLoading(true);
@@ -172,11 +172,12 @@ const Variants = () => {
         <div className="flex gap-2 items-center">
           <Link
             to="/admin/variants-value"
-            className="bg-black text-white py-2 px-2 rounded-md flex items-center gap-1"
+            className="bg-black text-white py-1 px-2 rounded-md flex items-center"
           >
             <FiPlus />
             Thêm value
           </Link>
+
           <Button
             className="bg-black"
             type="primary"

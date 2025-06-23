@@ -13,7 +13,7 @@ export const loginSchema = z.object({
 
 export const registerSchema = z
   .object({
-    username: z.string().min(3, "Ten phai co toi thieu 3 ky tu"),
+    fullName: z.string().min(3, "Ten phai co toi thieu 3 ky tu"),
 
     email: z
       .string()
