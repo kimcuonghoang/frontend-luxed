@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Modal, List, Button, Typography } from "antd";
 import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import { CartContext } from "../contexts/CartContext";
+import { Link } from "react-router-dom";
 
 const { Text } = Typography;
 
@@ -33,16 +34,16 @@ const CartModal = ({ visible, onClose }) => {
       open={visible}
       onCancel={onClose}
       footer={[
-        <Button key="close" onClick={onClose}>
-          Đóng
-        </Button>,
-        <Button
-          key="checkout"
-          type="text"
-          className="bg-gray-400 text-black border-none shadow-none hover:bg-black"
-        >
-          Thanh toán
-        </Button>,
+        <div>
+          <Button key="close" onClick={onClose}>
+            Đóng
+          </Button>
+          <Button>
+            <Link to={`cart`} onClick={onClose}>
+              Xem Giỏ hàng
+            </Link>
+          </Button>
+        </div>,
       ]}
     >
       <List

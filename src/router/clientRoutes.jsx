@@ -5,6 +5,8 @@ import Products from "../pages/client/Products";
 import Shop from "../pages/client/Shop";
 import ProfileSetting from "../pages/client/ProfileSetting";
 import Account from "../pages/client/Account";
+import Cart from "../pages/client/Cart";
+import Checkout from "../pages/client/Checkout";
 
 const clientRoutes = [
   { path: "/", element: <Home /> },
@@ -14,6 +16,8 @@ const clientRoutes = [
   { path: "/shop", element: <Shop /> },
   { path: "/profile-settings", element: <ProfileSetting /> },
   { path: "/account", element: <Account /> },
+  { path: "/cart", element: <Cart /> },
+  { path: "/checkout", element: <Checkout /> },
 ];
 
 export default clientRoutes;
