@@ -1,39 +1,22 @@
-const TOKEN = import.meta.env.VITE_TOKEN_API;
 import axios from "axios";
 
+const BASE_URL = "https://provinces.open-api.vn/api";
+
+// Lấy danh sách tỉnh/thành phố
 export const getProvinces = async () => {
-  const res = await axios.get(
-    "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province",
-    {
-      headers: {
-        token: TOKEN,
-      },
-    }
-  );
-  return res.data.data;
+  const res = await axios.get(`${BASE_URL}/p/`);
+  return res.data; // Mảng các tỉnh
 };
 
-export const getDistrict = async (body) => {
-  const res = await axios.post(
-    "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district",
-    body,
-    {
-      headers: {
-        token: TOKEN,
-      },
-    }
-  );
-  return res.data.data;
+// Lấy danh sách quận/huyện theo mã tỉnh (code)
+export const getDistricts = async (provinceCode) => {
+  const res = await axios.get(`${BASE_URL}/p/${provinceCode}?depth=2`);
+  return res.data.districts; // Mảng các quận/huyện
 };
 
-export const getWard = async (district_id) => {
-  const res = await api.get(
-    `https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=${district_id}`,
-    {
-      headers: {
-        Token: TOKEN,
-      },
-    }
-  );
-  return res.data.data;
+// Lấy danh sách phường/xã theo mã quận/huyện (code)
+export const getWards = async (districtCode) => {
+  const res = await axios.get(`${BASE_URL}/d/${districtCode}?depth=2`);
+  return res.data.wards; // Mảng các phường/xã
 };
+``
