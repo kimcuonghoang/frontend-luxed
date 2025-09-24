@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 import { Button, message, Modal } from "antd";
-import CategoryAdd from "./CategoryAdd";
-import CategoryEdit from "./CategoryEdit";
+
 import {
   getAllCategory,
   deleteCategory,
   updateCategory,
-} from "../../api/categoryApi";
+} from "../../../api/categoryApi";
+import CategoryAdd from "./CategoryAdd";
+import CategoryEdit from "./CategoryEdit";
 
 const Category = () => {
   const [products, setProducts] = useState([]);

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { getCategoryDetail, updateCategory } from "../../api/categoryApi";
-import { message } from "antd";
+import { getProductDetail, updateProduct } from "../../../api/productApi";
 
-const CategoryEdit = ({ productId, onClose, onSuccess }) => {
+const ProductEdit = ({ productId, onClose, onSuccess }) => {
   const {
     register,
     handleSubmit,
@@ -16,11 +15,11 @@ const CategoryEdit = ({ productId, onClose, onSuccess }) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const product = await getCategoryDetail(productId);
+        const product = await getProductDetail(productId);
         reset(product);
         setLoading(false);
       } catch (error) {
-        message.error("Lỗi khi tải dữ liệu danh mục!");
+        toast.error("Lỗi khi tải dữ liệu sản phẩm!");
         console.error(error);
       }
     };
@@ -31,16 +30,16 @@ const CategoryEdit = ({ productId, onClose, onSuccess }) => {
 
   const onSubmit = async (data) => {
     try {
-      await updateCategory(productId, {
+      await updateProduct(productId, {
         ...data,
         price: parseFloat(data.price),
         countInStock: parseInt(data.countInStock),
       });
-      message.success("Cập nhật danh mục thành công!");
+      toast.success("Cập nhật sản phẩm thành công!");
       onSuccess && onSuccess();
       onClose && onClose();
     } catch (error) {
-      message.error("Cập nhật thất bại!");
+      toast.error("Cập nhật thất bại!");
       console.error(error);
     }
   };
@@ -51,15 +50,47 @@ const CategoryEdit = ({ productId, onClose, onSuccess }) => {
     <div className="container mt-5">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-3">
-          <label className="form-label">Tên danh mục</label>
+          <label className="form-label">Tên sản phẩm</label>
           <input
             type="text"
             className="form-control"
-            {...register("title", { required: true })}
-            placeholder="Nhập tên danh mục..."
+            {...register("name", { required: true })}
+            placeholder="Nhập tên sản phẩm..."
           />
-          {errors.title && (
+          {errors.name && (
             <span className="text-danger">Tên không được bỏ trống.</span>
+          )}
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Ảnh </label>
+          <input
+            type="text"
+            className="form-control"
+            accept="image/*"
+            {...register("image", { required: true })}
+            placeholder="Nhập URL ảnh sản phẩm..."
+          />
+          {errors.image && (
+            <span className="text-danger">Ảnh không được bỏ trống.</span>
+          )}
+        </div>
+
+        <div className="mb-3">
+          <label className="form-label">Giá (VNĐ)</label>
+          <input
+            type="number"
+            className="form-control"
+            {...register("price", {
+              required: true,
+              min: { value: 0, message: "Giá phải lớn hơn 0" },
+            })}
+            placeholder="Nhập giá sản phẩm..."
+          />
+          {errors.price && (
+            <span className="text-danger">
+              {errors.price.message || "Giá không được bỏ trống."}
+            </span>
           )}
         </div>
 
@@ -69,7 +100,7 @@ const CategoryEdit = ({ productId, onClose, onSuccess }) => {
             className="form-control"
             rows="3"
             {...register("description", { required: true })}
-            placeholder="Nhập mô tả danh mục..."
+            placeholder="Nhập mô tả sản phẩm..."
           ></textarea>
           {errors.description && (
             <span className="text-danger">Mô tả không được bỏ trống.</span>
@@ -96,4 +127,4 @@ const CategoryEdit = ({ productId, onClose, onSuccess }) => {
   );
 };
 
-export default CategoryEdit;
+export default ProductEdit;

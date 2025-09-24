@@ -1,21 +1,23 @@
 import Dashboard from "../pages/admin/Dashboard";
-import Product from "../pages/admin/Product";
+
 import User from "../pages/admin/User";
-import ProductAdd from "../pages/admin/ProductAdd";
-import ProductEdit from "../pages/admin/ProductEdit";
-import ProductDetail from "./../pages/admin/ProductDetail";
-import Category from "../pages/admin/Category";
-import CategoryAdd from "../pages/admin/CategoryAdd";
-import CategoryEdit from "../pages/admin/CategoryEdit";
 
 import Analytics from "../pages/admin/Analytics";
 import Orders from "../pages/admin/Orders";
 import Customers from "../pages/admin/Customers";
 import Payments from "../pages/admin/Payments";
 import Settings from "../pages/admin/Settings";
-import Variants from "../pages/admin/Variants";
-import Attribute from "../pages/admin/Attribute";
-import VariantValue from "../pages/admin/VariantValue";
+import Variants from "../pages/admin/manager-variant/Variants";
+import Attribute from "../pages/admin/manager-attribute/Attribute";
+import VariantValue from "../pages/admin/manager-variant/VariantValue";
+import Category from "../pages/admin/manager-category/Category";
+import CategoryAdd from "../pages/admin/manager-category/CategoryAdd";
+import CategoryEdit from "../pages/admin/manager-category/CategoryEdit";
+import Product from "../pages/admin/manager-product/Product";
+import ProductAdd from "../pages/admin/manager-product/ProductAdd";
+import ProductDetail from "../pages/admin/manager-product/ProductDetail";
+import ProductEdit from "../pages/admin/manager-product/ProductEdit";
+import AttributeValue from "../pages/admin/manager-attribute/AttributeValue";
 
 const adminRoutes = [
   // Admin pages
@@ -37,7 +39,8 @@ const adminRoutes = [
   { path: "variants-value", element: <VariantValue /> },
 
   // Admin Attribute
-  { path: "Attribute", element: <Attribute /> },
+  { path: "attribute", element: <Attribute /> },
+  { path: "attribute-value", element: <AttributeValue /> },
 
   // Admin Categories
   { path: "categories", element: <Category /> },

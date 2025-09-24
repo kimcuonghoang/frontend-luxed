@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+
 import {
   deleteProduct,
   getAllProduct,
   updateProduct,
-} from "../../api/productApi";
+} from "../../../api/productApi";
 import { Button, message, Modal } from "antd";
 import ProductAdd from "./ProductAdd";
 import ProductEdit from "./ProductEdit";
@@ -77,24 +77,9 @@ const Product = () => {
 
   return (
     <div className="container mt-5">
-      <Button
-        className="bg-black mb-4 "
-        type="primary"
-        onClick={() => setIsAddModalOpen(true)}
-      >
+      <Link to={`/admin/products/add`} className="bg-black mb-4 ">
         Thêm mới sản phẩm
-      </Button>
-      <Modal
-        title="Thêm sản phẩm"
-        open={isAddModalOpen}
-        onCancel={() => setIsAddModalOpen(false)}
-        footer={null}
-      >
-        <ProductAdd
-          onClose={() => setIsAddModalOpen(false)}
-          onSuccess={fetchProducts}
-        />
-      </Modal>
+      </Link>
 
       <div className="row mb-3">
         <div className="col-md-4">
@@ -226,28 +211,6 @@ const Product = () => {
           Trang sau
         </button>
       </div>
-
-      <Modal
-        title="Chỉnh sửa sản phẩm"
-        open={isEditModalOpen}
-        onCancel={() => {
-          setIsEditModalOpen(false);
-          setSelectedProductId(null);
-        }}
-        footer={null}
-      >
-        {selectedProductId && (
-          <ProductEdit
-            // productId={product._id}
-            productId={selectedProductId}
-            onClose={() => {
-              setIsEditModalOpen(false);
-              setSelectedProductId(null);
-            }}
-            onSuccess={fetchProducts}
-          />
-        )}
-      </Modal>
     </div>
   );
 };

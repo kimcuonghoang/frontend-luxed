@@ -23,6 +23,7 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
+    console.log("hihi");
     try {
       const res = await registerApi(data);
       console.log(res);
@@ -73,45 +74,28 @@ const Register = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex gap-4">
                 <div>
+                  {/* Last Name */}
                   <div className="mb-7">
-                    <label htmlFor="" className="text-[#9D9D9D]">
-                      First Name
-                    </label>
+                    <label className="text-[#9D9D9D]">Full Name</label>
                     <input
                       type="text"
-                      className=" w-full border-b-2 border-gray-400"
-                      {...register("fullname")}
+                      className="w-full border-b-2 border-gray-400"
+                      {...register("fullName")}
                     />
-                    {errors?.fullname && (
+                    {errors?.fullName && (
                       <span className="text-danger">
-                        {errors.fullname.message}
+                        {errors.fullName.message}
                       </span>
                     )}
                   </div>
 
+                  {/* Email */}
                   <div className="mb-7">
-                    <label htmlFor="" className="text-[#9D9D9D]">
-                      Last Name{" "}
-                    </label>
+                    <label className="text-[#9D9D9D]">Email Address</label>
                     <input
                       type="email"
+                      className="w-full border-b-2 border-gray-400"
                       {...register("email")}
-                      className=" w-full border-b-2 border-gray-400"
-                    />
-                    {errors?.email && (
-                      <span className="text-danger">
-                        {errors.email.message}
-                      </span>
-                    )}
-                  </div>
-                  <div className="mb-7">
-                    <label htmlFor="" className="text-[#9D9D9D]">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      {...register("email")}
-                      className=" w-full border-b-2 border-gray-400"
                     />
                     {errors?.email && (
                       <span className="text-danger">
@@ -120,31 +104,15 @@ const Register = () => {
                     )}
                   </div>
                 </div>
-                <div>
-                  <div className="mb-7">
-                    <label htmlFor="" className="text-[#9D9D9D]">
-                      Phone Number
-                    </label>
-                    <input
-                      type="email"
-                      {...register("email")}
-                      className=" w-full border-b-2 border-gray-400"
-                    />
-                    {errors?.email && (
-                      <span className="text-danger">
-                        {errors.email.message}
-                      </span>
-                    )}
-                  </div>
 
+                <div>
+                  {/* Password */}
                   <div className="mb-7">
-                    <label htmlFor="" className="text-[#9D9D9D]">
-                      Password
-                    </label>
+                    <label className="text-[#9D9D9D]">Password</label>
                     <input
                       type="password"
+                      className="w-full border-b-2 border-gray-400"
                       {...register("password")}
-                      className=" w-full border-b-2 border-gray-400"
                     />
                     {errors?.password && (
                       <span className="text-danger">
@@ -153,16 +121,14 @@ const Register = () => {
                     )}
                   </div>
 
+                  {/* Confirm Password */}
                   <div className="mb-7">
-                    <label htmlFor="" className="text-[#9D9D9D]">
-                      Confirm Password
-                    </label>
+                    <label className="text-[#9D9D9D]">Confirm Password</label>
                     <input
                       type="password"
+                      className="w-full border-b-2 border-gray-400"
                       {...register("confirmPassword")}
-                      className=" w-full border-b-2 border-gray-400"
                     />
-
                     {errors?.confirmPassword && (
                       <span className="text-danger">
                         {errors.confirmPassword.message}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { Checkbox, Button, InputNumber } from "antd";
+import { Button, InputNumber } from "antd";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { MdNavigateNext } from "react-icons/md";
@@ -8,7 +8,7 @@ import { MdNavigateNext } from "react-icons/md";
 export default function Cart() {
   const [quantity, setQuantity] = useState(1);
   const price = 14.9;
-  const wrapFee = 10.0;
+
   const [wrap, setWrap] = useState(false);
 
   const subtotal = wrap ? 100.0 : (price * quantity).toFixed(2);
@@ -78,32 +78,20 @@ export default function Cart() {
       </div>
 
       <div className="flex justify-end">
-        <div>
-          <div className="gap-2 mt-4 border-b-2 ">
-            <Checkbox
-              checked={wrap}
-              onChange={(e) => setWrap(e.target.checked)}
-            />
-            <span className="text-sm text-gray-700 ">
-              For ${wrapFee.toFixed(2)} Please Wrap The Product
-            </span>
-          </div>
-
-          <div className=" mt-8">
-            <div className="text-right">
-              <div className="flex justify-between">
-                <p className="text-base font-medium">Subtotal</p>
-                <p className="text-lg font-bold">${subtotal}</p>
-              </div>
-              <Button
-                type="primary"
-                block
-                className="mt-4 bg-black text-white hover:bg-gray-800"
-                size="large"
-              >
-                <Link to={`/checkout`}> Checkout</Link>
-              </Button>
+        <div className=" mt-8">
+          <div className="text-right">
+            <div className="flex justify-between">
+              <p className="text-base font-medium">Subtotal</p>
+              <p className="text-lg font-bold">${subtotal}</p>
             </div>
+            <Button
+              type="primary"
+              block
+              className="mt-4 bg-black text-white hover:bg-gray-800"
+              size="large"
+            >
+              <Link to={`/checkout`}> Checkout</Link>
+            </Button>
           </div>
         </div>
       </div>

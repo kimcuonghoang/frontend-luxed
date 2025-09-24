@@ -1,24 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { message } from "antd";
-import { createColor } from "../../api/colorApi";
-import { createSize } from "../../api/sizeApi";
 
 const VariantValue = () => {
-  const {
-    register: registerColor,
-    handleSubmit: handleSubmitColor,
-    reset: resetColor,
-    formState: { errors: errorsColor },
-  } = useForm();
-
-  const {
-    register: registerSize,
-    handleSubmit: handleSubmitSize,
-    reset: resetSize,
-    formState: { errors: errorsSize },
-  } = useForm();
-
   const onSubmitColor = async (data) => {
     try {
       const newColor = {

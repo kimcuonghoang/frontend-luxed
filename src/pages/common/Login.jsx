@@ -28,16 +28,16 @@ const Login = () => {
   const onSubmit = async (dataForm) => {
     try {
       const { data } = await loginApi(dataForm);
-      if (data.accessToken) {
-        localStorage.setItem("token", data.accessToken);
-        localStorage.setItem("user", JSON.stringify(data.user));
-      }
+      const { token, user } = data.data;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
       reset();
       toast.success("Login successfully!");
       navigate("/");
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data || "Login failed!");
+      toast.error("Đăng nhập thất bại, vui lòng kiểm tra lại thông tin !");
       reset();
     }
   };

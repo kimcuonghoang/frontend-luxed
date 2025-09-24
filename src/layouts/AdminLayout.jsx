@@ -37,7 +37,6 @@ const AdminLayout = () => {
     { icon: FiCreditCard, label: "Payments", to: "payments" },
     { icon: FiShoppingBag, label: "Products", to: "products" },
     { icon: CiBoxList, label: "Categories", to: "categories" },
-    { icon: CiBoxList, label: "Variants", to: "variants" },
     { icon: CiBoxList, label: "Attribute", to: "attribute" },
     { icon: FiSettings, label: "Settings", to: "settings" },
     { icon: RollbackOutlined, label: "Back to Home", to: "/" },

@@ -1,12 +1,37 @@
-import api from "./index";
+import api from ".";
 
-export const createVariant = (data) => api.post("variants", data);
-export const getVariantDetail = async (id) => {
-  const res = await api.get(`variants/${id}`);
-  return res.data.data;
+// Lấy tất cả variants
+export const getAllVariants = async () => {
+  const res = await api.get(`/variants`);
+  return res.data;
 };
-export const updateVariant = (id, data) => api.patch(`variants/${id}`, data);
 
-export const deleteVariant = (id) => api.delete(`variants/${id}`);
+// Lấy variant chi tiết theo id
+export const getVariantById = async (id) => {
+  const res = await api.get(`/variants/${id}`);
+  return res.data;
+};
 
-export const getAllVariant = (data) => api.get(`variants`, data);
+// Lấy danh sách variant theo productId
+export const getVariantsByProduct = async (productId) => {
+  const res = await api.get(`/variants/product/${productId}`);
+  return res.data;
+};
+
+// Tạo variant
+export const createVariant = async (data) => {
+  const res = await api.post(`/variants`, data);
+  return res.data;
+};
+
+// Cập nhật variant
+export const updateVariant = async (id, data) => {
+  const res = await api.patch(`/variants/${id}`, data);
+  return res.data;
+};
+
+// Xóa variant
+export const deleteVariant = async (id) => {
+  const res = await api.delete(`/variants/${id}`);
+  return res.data;
+};
