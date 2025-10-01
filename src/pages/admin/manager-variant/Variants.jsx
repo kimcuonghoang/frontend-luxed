@@ -21,7 +21,7 @@ import {
   deleteVariant,
 } from "../../../api/variantApi";
 import { getAllAttribute } from "../../../api/attributeApi";
-import { getAttributeValueByProductId } from "../../../api/attributeValueApi";
+import { getAttributeValueByAttribute } from "../../../api/attributeValueApi";
 
 const Variants = () => {
   const [form] = Form.useForm();
@@ -63,7 +63,7 @@ const Variants = () => {
 
   const handleAttributeChange = async (attributeId) => {
     try {
-      const res = await getAttributeValueByProductId(attributeId);
+      const res = await getAttributeValueByAttribute(attributeId);
       setAttributeValues(res.data || res);
       form.setFieldValue("attributeValueId", undefined);
     } catch (err) {

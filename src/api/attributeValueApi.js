@@ -1,9 +1,10 @@
 import api from "./index";
 
 // Lấy attributeValue theo productId
-export const getAttributeValueByProductId = async (productId) => {
-  const res = await api.get(`/attribute-value/productId/${productId}`);
-  return res.data;
+export const getAttributeValueByAttribute = async (attributeId) => {
+  const res = await api.get(`/attribute-value/${attributeId}`);
+  console.log(res);
+  return res.data.data;
 };
 
 // Lấy tất cả attributeValue

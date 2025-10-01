@@ -86,6 +86,8 @@ export default function Header() {
             { path: "/", label: "Home" },
             { path: "/shop", label: "Shop" },
             { path: "/contact", label: "Contact" },
+            { path: "/privacy", label: "Privacy" },
+            { path: "/terms", label: "Terms" },
           ].map((link) => (
             <Link
               key={link.path}

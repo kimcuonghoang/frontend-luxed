@@ -18,10 +18,12 @@ import {
   createAttributeValue,
   updateAttributeValue,
   deleteAttributeValue,
+  getAttributeValueByAttribute,
 } from "../../../api/attributeValueApi";
 import { getAllAttribute } from "../../../api/attributeApi";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 const AttributeValue = () => {
   const [form] = Form.useForm();
@@ -29,12 +31,14 @@ const AttributeValue = () => {
   const [editing, setEditing] = useState(null);
 
   const queryClient = useQueryClient();
+  const { attributeId } = useParams();
 
-  // Query: lấy danh sách AttributeValues
   const { data: attributeValues, isLoading } = useQuery({
     queryKey: ["ATTRIBUTE_VALUES"],
-    queryFn: getAllAttributeValue,
+    queryFn: () => getAttributeValueByAttribute(attributeId),
+    enabled: !!attributeId,
   });
+  console.log(attributeValues);
 
   // Query: lấy danh sách Attributes (dropdown Select)
   const { data: attributes } = useQuery({
@@ -158,7 +162,7 @@ const AttributeValue = () => {
       <Table
         rowKey="_id"
         columns={columns}
-        dataSource={attributeValues?.data || []}
+        dataSource={attributeValues || []}
         loading={isLoading}
       />
 

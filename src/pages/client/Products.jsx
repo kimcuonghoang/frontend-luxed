@@ -79,7 +79,7 @@
 
 //         <div className="space-y-6">
 //           <div>
-//             <h2 className="text-sm uppercase text-gray-500">CodeFarm</h2>
+//             <h2 className="text-sm uppercase text-gray-500">LUXE</h2>
 //             <h1 className="text-3xl font-bold">{product.name}</h1>
 //             <div className="flex items-center gap-2 mt-1">
 //               <span className="text-yellow-400">★★★★☆</span>

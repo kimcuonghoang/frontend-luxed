@@ -41,6 +41,7 @@ const adminRoutes = [
   // Admin Attribute
   { path: "attribute", element: <Attribute /> },
   { path: "attribute-value", element: <AttributeValue /> },
+  { path: "attribute-value/:attributeId", element: <AttributeValue /> },
 
   // Admin Categories
   { path: "categories", element: <Category /> },

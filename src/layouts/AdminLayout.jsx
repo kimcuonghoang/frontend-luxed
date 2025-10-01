@@ -19,26 +19,27 @@ import {
 import { Avatar, Badge, Dropdown, Switch } from "antd";
 import { RollbackOutlined } from "@ant-design/icons";
 import imgAvt from "../assets/imgs/imgLogin.png";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { CiBoxList } from "react-icons/ci";
 
 const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const location = useLocation();
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const navigationItems = [
-    { icon: FiHome, label: "Dashboard", to: "dashboard", active: true },
-    { icon: FiBarChart2, label: "Analytics", to: "analytics" },
-    { icon: FiPackage, label: "Orders", to: "orders" },
-    { icon: FiUsers, label: "Customers", to: "customers" },
-    { icon: FiCreditCard, label: "Payments", to: "payments" },
-    { icon: FiShoppingBag, label: "Products", to: "products" },
-    { icon: CiBoxList, label: "Categories", to: "categories" },
-    { icon: CiBoxList, label: "Attribute", to: "attribute" },
-    { icon: FiSettings, label: "Settings", to: "settings" },
+    { icon: FiHome, label: "Dashboard", to: "/admin/dashboard" },
+    { icon: FiBarChart2, label: "Analytics", to: "/admin/analytics" },
+    { icon: FiPackage, label: "Orders", to: "/admin/orders" },
+    { icon: FiUsers, label: "Customers", to: "/admin/customers" },
+    { icon: FiCreditCard, label: "Payments", to: "/admin/payments" },
+    { icon: FiShoppingBag, label: "Products", to: "/admin/products" },
+    { icon: CiBoxList, label: "Categories", to: "/admin/categories" },
+    { icon: CiBoxList, label: "Attribute", to: "/admin/attribute" },
+    { icon: FiSettings, label: "Settings", to: "/admin/settings" },
     { icon: RollbackOutlined, label: "Back to Home", to: "/" },
   ];
 
@@ -97,31 +98,39 @@ const AdminLayout = () => {
         {/* Navigation */}
         <nav className="mt-8 px-4">
           <ul className="space-y-2">
-            {navigationItems.map((item, index) => (
-              <li key={index}>
-                <Link
-                  to={item.to}
-                  className={`flex items-center justify-between px-4 py-3 rounded-lg transition-colors duration-200 group ${
-                    item.active
-                      ? darkMode
-                        ? "bg-white text-black"
-                        : "bg-black text-white"
-                      : darkMode
-                      ? "text-gray-300 hover:bg-gray-800 hover:text-white"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                  }`}
-                >
-                  <div className="flex items-center space-x-3">
-                    <item.icon className="w-5 h-5" />
-                    <span className="font-medium">{item.label}</span>
-                  </div>
-                </Link>
-              </li>
-            ))}
+            {navigationItems.map((item, index) => {
+              const isActive =
+                item.to !== "/" && location.pathname.startsWith(item.to);
+
+              return (
+                <li key={index}>
+                  <Link
+                    to={item.to}
+                    className={`flex items-center px-4 py-3 rounded-lg transition-colors duration-200 relative group ${
+                      isActive
+                        ? darkMode
+                          ? "bg-gray-800 text-white"
+                          : "bg-gray-100 text-black"
+                        : darkMode
+                        ? "text-gray-300 hover:bg-gray-800 hover:text-white"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                    }`}
+                  >
+                    {/* Border left highlight */}
+                    {isActive && (
+                      <span className="absolute left-0 top-0 h-full w-1 bg-black dark:bg-white rounded-r" />
+                    )}
+
+                    <div className="flex items-center space-x-3">
+                      <item.icon className="w-5 h-5" />
+                      <span className="font-medium">{item.label}</span>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
-
-        {/* Dark Mode Toggle */}
       </div>
 
       {/* Main Content */}

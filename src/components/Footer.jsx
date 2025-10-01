@@ -32,7 +32,7 @@ const Footer = () => {
       </div>
       <div className="flex justify-center gap-96 mt-6 mb-10 items-center  ">
         <div>
-          <h3 className="text-3xl font-bold text-gray-800 ">CodeFarm</h3>
+          <h3 className="text-3xl font-bold text-gray-800 ">LUXE</h3>
         </div>
         <div className="flex gap-9 ">
           <Link to="" className="">
@@ -57,8 +57,8 @@ const Footer = () => {
       </div>
       <div className="text-center text-sm md:text-base mb-6">
         Copyright © 2022{" "}
-        <span className="font-semibold text-purple-400">CodeFarm</span>. All
-        Rights Reserved.
+        <span className="font-semibold text-purple-400">LUXE</span>. All Rights
+        Reserved.
       </div>
     </footer>
   );

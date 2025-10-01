@@ -12,6 +12,7 @@ import {
   message,
 } from "antd";
 import { FiPlus, FiEdit, FiTrash2 } from "react-icons/fi";
+import { EyeOutlined } from "@ant-design/icons";
 import {
   getAllAttribute,
   createAttribute,
@@ -20,6 +21,7 @@ import {
 } from "../../../api/attributeApi";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const Attribute = () => {
   const [form] = Form.useForm();
@@ -122,6 +124,9 @@ const Attribute = () => {
       title: "Hành động",
       render: (_, record) => (
         <Space>
+          <Link to={`/admin/attribute-value/${record._id}`}>
+            <Button icon={<EyeOutlined />} />
+          </Link>
           <Button icon={<FiEdit />} onClick={() => openModal(record)} />
           <Popconfirm
             title="Bạn có chắc muốn xóa?"

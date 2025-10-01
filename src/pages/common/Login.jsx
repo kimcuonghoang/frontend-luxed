@@ -1,9 +1,5 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
-import { useForm } from "react-hook-form";
-
-import { loginSchema } from "../../validations/authSchema";
-import { toast } from "react-toastify";
+import { Form, Input, Button, message } from "antd";
 import { loginApi } from "../../api/authApi";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -16,29 +12,19 @@ import ScrollToTop from "../../components/ScrollToTop";
 
 const Login = () => {
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(loginSchema),
-  });
 
-  const onSubmit = async (dataForm) => {
+  const onFinish = async (values) => {
     try {
-      const { data } = await loginApi(dataForm);
+      const { data } = await loginApi(values);
       const { token, user } = data.data;
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      reset();
-      toast.success("Login successfully!");
+      message.success("Login successful!");
       navigate("/");
     } catch (error) {
       console.log(error);
-      toast.error("Đăng nhập thất bại, vui lòng kiểm tra lại thông tin !");
-      reset();
+      message.error("Login failed, please check your information again!");
     }
   };
 
@@ -46,92 +32,92 @@ const Login = () => {
     <>
       <ScrollToTop />
       <Header />
-      <div className=" m-16  ">
-        <div className="grid grid-cols-2 border-solid border-2 border-gray-300">
-          <div>
-            <img src={imgLogin} alt="" />
+      <div className="min-h-screen flex items-center justify-center bg-white px-8 py-16">
+        <div className="grid grid-cols-2 max-w-6xl w-full shadow-xl border border-gray-200">
+          {/* Image Side */}
+          <div className="hidden md:block">
+            <img
+              src={imgLogin}
+              alt="Fashion Login"
+              className="h-full w-full object-cover"
+            />
           </div>
-          <div className="p-5">
-            <h1 className="text-6xl pb-16 font-semibold">CodeFarm</h1>
-            <h3 className="text-3xl font-medium mb-7">
-              Sign In To <span className="font-semibold">CodeFarm</span>
+
+          {/* Form Side */}
+          <div className="p-12 flex flex-col justify-center bg-white">
+            <h3 className="text-2xl font-light uppercase tracking-wide mb-12 text-gray-600">
+              Sign In To <span className="font-semibold">LUXE</span>
             </h3>
-            <div className="flex gap-16 mb-20">
+
+            {/* Social Buttons */}
+            <div className="flex gap-6 mb-16">
               <button
                 type="button"
-                className="flex items-center justify-center gap-1 py-2 px-2 rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition-all"
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 uppercase tracking-wide font-medium text-gray-800 hover:bg-black hover:text-white transition-all duration-300"
               >
-                <img src={iconGoogle} alt="Google" className="w-6 h-6" />
-                <span className="text-base font-medium text-gray-700">
-                  Sign up with Google
-                </span>
+                <img src={iconGoogle} alt="Google" className="w-5 h-5" />
+                Google
               </button>
 
               <button
                 type="button"
-                className="flex items-center justify-center gap-1 py-2 px-2 rounded-lg border-2 border-gray-300 hover:bg-gray-100 transition-all"
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 border border-gray-300 uppercase tracking-wide font-medium text-gray-800 hover:bg-black hover:text-white transition-all duration-300"
               >
-                <img src={iconEmail} alt="Google" className="w-6 h-6" />
-                <span className="text-base font-medium text-gray-700">
-                  Sign up with Email
-                </span>
+                <img src={iconEmail} alt="Email" className="w-5 h-5" />
+                Email
               </button>
             </div>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-[#9D9D9D] mb-1"
-                >
-                  Email Address
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  {...register("email")}
-                  className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                />
-                {errors?.email && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
+            {/* Ant Design Form */}
+            <Form
+              layout="vertical"
+              onFinish={onFinish}
+              className="w-full max-w-md mx-auto"
+              size="large"
+            >
+              <Form.Item
+                label={
+                  <span className="uppercase text-xs tracking-wide text-gray-500">
+                    Email
+                  </span>
+                }
+                name="email"
+                rules={[
+                  { required: true, message: "Please input your email!" },
+                  { type: "email", message: "Invalid email format!" },
+                ]}
+              >
+                <Input className="rounded-none border-0 border-b border-gray-400 focus:ring-0" />
+              </Form.Item>
 
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-[#9D9D9D] mb-1"
-                >
-                  Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  {...register("password")}
-                  className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                />
-                {errors?.password && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
+              <Form.Item
+                label={
+                  <span className="uppercase text-xs tracking-wide text-gray-500">
+                    Password
+                  </span>
+                }
+                name="password"
+                rules={[
+                  { required: true, message: "Please input your password!" },
+                ]}
+              >
+                <Input.Password className="rounded-none border-0 border-b border-gray-400 focus:ring-0" />
+              </Form.Item>
 
-              <div className="flex justify-center">
-                <button
-                  type="submit"
-                  className="w-full max-w-md bg-black text-white font-medium py-3 rounded-lg shadow-md hover:bg-gray-800 transition duration-200"
+              <Form.Item>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="w-full uppercase tracking-widest font-semibold bg-black hover:bg-gray-800 text-white py-3 rounded-none"
                 >
                   Sign In
-                </button>
-              </div>
+                </Button>
+              </Form.Item>
 
-              <div className="w-full max-w-md mx-auto flex flex-col gap-2">
+              <div className="w-full max-w-md mx-auto flex flex-col gap-4 mt-6">
                 <Link
                   to="/auth/register"
-                  className="text-center text-blue-600 font-medium py-3 rounded-lg border-2 border-blue-500 bg-white hover:bg-blue-50 transition-all duration-200"
+                  className="text-center uppercase tracking-wider font-semibold py-3 border border-black hover:bg-black hover:text-white transition-all duration-300"
                 >
                   Register Now
                 </Link>
@@ -139,13 +125,13 @@ const Login = () => {
                 <div className="w-full flex justify-end">
                   <Link
                     to=""
-                    className="text-[#5B86E5] text-sm hover:underline"
+                    className="text-sm italic text-gray-500 hover:underline"
                   >
                     Forgot Password?
                   </Link>
                 </div>
               </div>
-            </form>
+            </Form>
           </div>
         </div>
       </div>

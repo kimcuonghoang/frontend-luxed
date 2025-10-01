@@ -7,6 +7,8 @@ import ProfileSetting from "../pages/client/ProfileSetting";
 import Account from "../pages/client/Account";
 import Cart from "../pages/client/Cart";
 import Checkout from "../pages/client/Checkout";
+import Privacy from "../pages/client/Privacy";
+import Terms from "../pages/client/Terms";
 
 const clientRoutes = [
   { path: "/", element: <Home /> },
@@ -18,6 +20,8 @@ const clientRoutes = [
   { path: "/account", element: <Account /> },
   { path: "/cart", element: <Cart /> },
   { path: "/checkout", element: <Checkout /> },
+  { path: "/privacy", element: <Privacy /> },
+  { path: "/terms", element: <Terms /> },
 ];
 
 export default clientRoutes;
